@@ -25,6 +25,7 @@ import useScreenSize from '@/hooks/useScreenSize';
 // Import Components
 import QuerySuggestions from '@/components/federatedSearch/components/QuerySuggestions';
 import Banner from '@/components/banners/Banner';
+import { NoResultsCurrentRefinements } from '@/components/@instantsearch/widgets/no-results-handler/no-results-current-refinement';
 
 // Import Persona State from recoil
 import { shouldHaveInjectedBanners } from '@/config/featuresConfig';
@@ -106,6 +107,8 @@ const NoResults = memo(({ query }) => {
               </div>
             </>
           )}
+          <span>You might also want to remove some filters</span>
+          <NoResultsCurrentRefinements />
         </ul>
       </div>
     </div>

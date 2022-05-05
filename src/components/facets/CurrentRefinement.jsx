@@ -1,13 +1,17 @@
 // TODO: not sure exactly how this works
 // Component that renders the Current Refinements (icons above the products)
+import { useEffect } from 'react';
 
 // Recoil State
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // import config file for state of facets
 import { currencySymbolAtom } from '@/config/currencyConfig';
-import { refinementPriceLabels } from '@/config/refinementsConfig';
+import {
+  refinementPriceLabels,
+  refinementCountAtom,
+} from '@/config/refinementsConfig';
 import { hitsConfig } from '@/config/hitsConfig';
 
 const displayPrice = (i, currencySymbol, refinementPriceLabels) => {
@@ -40,8 +44,18 @@ const displayColor = (i) => {
 };
 
 const CurrentRefinements = ({ items, refine, createURL }) => {
-  const { colourHexa } = hitsConfig;
   const currencySymbol = useRecoilValue(currencySymbolAtom);
+  const setCountRefinement = useSetRecoilState(refinementCountAtom);
+  useEffect(() => {
+    let i = 0;
+    items.map((ref) => {
+      i += ref.currentRefinement.length;
+      return i;
+    });
+    setCountRefinement(i);
+  }, [items]);
+
+  const { colourHexa } = hitsConfig;
   return (
     <ul className="refinement-container__refinements">
       {items.map((item) => {
