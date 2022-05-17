@@ -6,6 +6,11 @@ export const shouldShowDemoTour = atom({
   default: true,
 });
 
+const openGuide = () => {
+  const button = document.getElementsByClassName('open-tour__button')
+  button.click()
+}
+
 // Steps for the demo tour, these are adjustable
 export const steps = [
   {
@@ -32,4 +37,10 @@ export const steps = [
     content:
       'We made a helpful Guide Panel to show some of the awesome features in this demo!',
   },
+  {
+    selector: '.helpNavigation',
+    content: 'this is the demo guide',
+    observe: '[data-tut="reactour__help"]',
+    action: () => openGuide()
+  }
 ];

@@ -61,6 +61,7 @@ const DemoGuide = ({ setshowDemoGuide }) => {
   return (
     <motion.div
       ref={demoGuide}
+      id="reactour__help"
       className={`${
         tablet || mobile ? 'helpNavigation-mobile' : ''
       } helpNavigation`}
