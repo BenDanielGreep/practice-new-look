@@ -31,7 +31,6 @@ import Badge from './Badge';
 //Import hook for store ID into local storage
 import useStoreIdToLocalStorage from '@/hooks/useStoreObjectIdToLocalStorage';
 
-
 // import Price component
 import Price from '@/components/price/price.jsx';
 
@@ -42,6 +41,10 @@ const Hit = ({ hit, setSrpIsLoaded }) => {
 
   // Get hit attribute from config file
   const { objectID, image, imageAlt, category, productName } = hitsConfig;
+
+  useEffect(() => {
+    console.log(get(hit, imageAlt));
+  }, [imageAlt]);
 
   const [shouldShowRankingInfo, setShouldShowRankingInfo] = useState(false);
   useEffect(() => {
@@ -117,7 +120,7 @@ const Hit = ({ hit, setSrpIsLoaded }) => {
               className={
                 shouldShowRankingInfo ? 'secondImage-opacity' : 'secondImage'
               }
-              src={get(hit, imageAlt)}
+              src={get(hit, imageAlt)[0]}
               alt={get(hit, category)}
               onError={(e) => (e.currentTarget.src = placeHolderError)}
             />
